@@ -76,8 +76,33 @@ public class MapGeneration2D : MonoBehaviour
                     edge.p0,
                     edge.p1
                 };
-                //points.Sort(new ClockwiseComparer(site));
-              
+                Vector2 p0 = points[0];
+                Vector2 p1 = points[1];
+
+                int distance = (int)Mathf.Abs(Vector2.Distance(p0, p1));
+                for (int k = 0; k <=distance ; k++)
+                {
+                    Vector2 temp = p1 - p0;
+                    temp.Normalize();
+                    Vector2 pos = k * temp + p0;
+                    
+                    int x;
+                    int y;
+
+                    if ((int)pos.x >= mapWidth)
+                        x = ((int)pos.x) - 1;
+                    else
+                        x = (int)pos.x;
+
+                    if ((int)pos.y >= mapHeight)
+                        y = ((int)pos.y) - 1;
+                    else
+                        y = (int)pos.y;
+
+                    texture.SetPixel(x,y, borderColour);
+                }
+
+                /*
                 if(Mathf.Abs(points[1].x -points[0].x) < 1)
                 {
                     if (points[1].y > points[0].y)
@@ -176,6 +201,7 @@ public class MapGeneration2D : MonoBehaviour
                         }
                     }
                 }
+                */
             }
         }
 
