@@ -11,6 +11,8 @@ public class MapCell{
 
     public Biome biome;
 
+    public List<MapEdge> edges;
+
     public Vector2 position { get; set; }
 
 

@@ -161,18 +161,7 @@ public class VoronoiDiagram : MonoBehaviour {
                 LineSegment l = lineSegments[i];
                 //Debug.Log(l.P0);
                 //Debug.Log(l.P1);
-                /*
-                if (CompareEdge(l.P0, l.P1) && !vertices2D.Contains(l.P0))
-                {
-                    
-                    vertices2D.Add(l.P0);
-                    GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = new Vector3(l.P0.x, 0, l.P0.y);
-                }
-                else if (!vertices2D.Contains(l.P1)){
-                    vertices2D.Add(l.P1);
-                    GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = new Vector3(l.P1.x, 0, l.P1.y);
-                }
-                */
+                
                 if (!ContainsVertex(vertices2D,l.P0))
                 {
                     vertices2D.Add(l.P0);
