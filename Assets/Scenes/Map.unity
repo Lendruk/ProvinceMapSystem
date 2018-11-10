@@ -355,10 +355,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 151dc1a208107af469f58af1bbe87154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 500
-  mapHeight: 500
+  mapWidth: 300
+  mapHeight: 300
   relaxations: 2
-  pointCount: 200
+  pointCount: 10
   seed: 300
   parent: {fileID: 704578621}
   plane: {fileID: 704578617}

@@ -51,6 +51,7 @@ public class MapGeneration2D : MonoBehaviour
     void Draw()
     {
         texture = new Texture2D(mapWidth, mapHeight);
+        FillWhite();
         Debug.Log(map_points.Count);
         for (int i = 0; i < map_points.Count; i++)
         {
@@ -101,112 +102,68 @@ public class MapGeneration2D : MonoBehaviour
 
                     texture.SetPixel(x,y, borderColour);
                 }
-
-                /*
-                if(Mathf.Abs(points[1].x -points[0].x) < 1)
-                {
-                    if (points[1].y > points[0].y)
-                    {
-                        for (int yi = (int)points[0].y; yi < (int)points[1].y; yi++)
-                        {
-                            texture.SetPixel((int)points[0].x, yi, borderColour);
-                        }
-                        continue;
-                    }
-                    else
-                    {
-                        for (int yi = (int)points[0].y; yi > (int)points[1].y; yi--)
-                        {
-                            texture.SetPixel((int)points[0].x, yi, borderColour);
-                        }
-                        continue;
-                    }
-
-                }
-                else if(Mathf.Abs(points[1].y - points[0].y )< 1)
-                {
-                    if (points[0].x > points[1].x)
-                    {
-                        for (int xi = (int)points[0].x; xi >= (int)points[1].x; xi--)
-                        {
-                            texture.SetPixel(xi, (int)points[0].y, borderColour);
-                        }
-                        continue;
-                    }
-                    else
-                    {
-                       
-                            for (int xi = (int)points[0].x; xi <= (int)points[1].x; xi++)
-                            {
-                                texture.SetPixel(xi, (int)points[0].y, borderColour);
-                            }
-                            continue;
-                        }
-                    
-                }
-                  float   m = (points[1].y - points[0].y) / (points[1].x - points[0].x);
-                  float  b = points[0].y - (m * points[0].x);
-
-                if (m > 1 || m < -1)
-                {
-                    if (points[1].y > points[0].y)
-                    {
-                        for (int yi = (int)points[0].y; yi < (int)points[1].y; yi++)
-                        {
-                            if ((yi / m - b / m) < 0)
-                                continue;
-                            if ((yi / m - b / m) >= mapHeight )
-                                continue;
-
-                            texture.SetPixel((int)(yi / m - b / m), yi, borderColour);
-                        }
-                    }
-                    else
-                    {
-                        for (int yi = (int)points[0].y; yi > (int)points[1].y; yi--)
-                        {
-                            if ((yi / m - b / m) < 0)
-                                continue;
-                            if ((yi / m - b / m) >= mapHeight)
-                                continue;
-
-                            texture.SetPixel((int)(yi / m - b / m), yi, borderColour);
-                        }
-                    }
-                }
-                else
-                {
-                    if (points[1].x > points[0].x)
-                    {
-                        for (int xi = (int)points[0].x; xi <= (int)points[1].x; xi++)
-                        {
-                            if ((m * xi) + b < 0)
-                                continue;
-                            if ((m * xi) + b >= mapWidth)
-                                continue;
-
-                            texture.SetPixel(xi, (int)(m * xi + b), borderColour);
-                        }
-                    }
-                    else
-                    {
-                        for (int xi = (int)points[0].x; xi >= (int)points[1].x; xi--)
-                        {
-                            if ((m * xi) + b < 0)
-                                continue;
-                            if ((m * xi) + b >= mapWidth)
-                                continue;
-
-                            texture.SetPixel(xi, (int)(m * xi + b), borderColour);
-                        }
-                    }
-                }
-                */
             }
+            texture.Apply();
+
+            //Fill Center
+            if (i == 0)
+                FloodFill((int)site.x, (int)site.y, Color.green);
+            //BoundaryFill4((int)site.x, (int)site.y, Color.green, borderColour);
         }
 
         texture.Apply();
         plane.GetComponent<MeshRenderer>().sharedMaterial.mainTexture = texture;
+    }
+
+    void BoundaryFill4(int x, int y, Color colour, Color boundaryColour)
+    {
+        if (!CompareColour(texture.GetPixel(x, y), colour) && texture.GetPixel(x, y) != boundaryColour)
+        {
+            if (x >= 0 && x <= mapWidth - 1 && y >= 0 && y <= mapHeight - 1)
+            {
+                texture.SetPixel(x, y, colour);
+                texture.Apply();
+                BoundaryFill4(x + 1, y, colour, boundaryColour);
+                BoundaryFill4(x, y + 1, colour, boundaryColour);
+                //BoundaryFill4(x - 1, y, colour, boundaryColour);
+                //BoundaryFill4(x, y - 1, colour, boundaryColour);
+            }
+        }
+    }
+    void FloodFill(int x,int y,Color replacement)
+    {
+        Color cur = texture.GetPixel(x, y);
+        if (CompareColour(cur, replacement))
+            return;
+        if (cur != Color.white)
+            return;
+        texture.SetPixel(x, y, replacement);
+        texture.Apply();
+        FloodFill(x, y + 1, replacement);
+        FloodFill(x, y - 1, replacement);
+        FloodFill(x+1, y, replacement);
+        FloodFill(x - 1, y, replacement);
+        return;
+    }
+        
+    bool CompareColour(Color c1 ,Color c2)
+    {
+        if((int)(c1.r * 1000) == (int)(c2.r * 1000) && (int)(c1.g * 1000) == (int)(c2.g * 1000) && (int)(c1.b * 1000) == (int)(c2.b * 1000))
+        {
+            return true;
+        }
+        return false;
+    }
+    void FillWhite()
+    {
+        for (int i = 0; i < mapWidth; i++)
+        {
+            for (int j = 0; j < mapHeight; j++)
+            {
+                texture.SetPixel(i, j, Color.white);
+            }
+        }
+        texture.Apply();
     }
 
     void RandomizePoints(int seed)
