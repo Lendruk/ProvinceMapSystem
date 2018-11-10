@@ -26,6 +26,7 @@ public class MapGeneration2D : MonoBehaviour
     private void Start()
     {
         plane.transform.localScale = new Vector3(mapWidth/10.0f, 1f, mapHeight/10.0f);
+        plane.transform.position = new Vector3(mapWidth / 2f, 0, mapHeight / 2f);
         GenerateMap();
     }
 
@@ -103,30 +104,37 @@ public class MapGeneration2D : MonoBehaviour
                     texture.SetPixel(x,y, borderColour);
                 }
             }
-            texture.Apply();
-
+            //texture.Apply();
             //Fill Center
-            if (i == 0)
-                FloodFill((int)site.x, (int)site.y, Color.green);
-            //BoundaryFill4((int)site.x, (int)site.y, Color.green, borderColour);
+             //if (i == 0)
+               // BoundaryFill4((int)site.x, (int)site.y, Color.green, borderColour,true);
+                BoundaryFill4((int)site.x, (int)site.y, Color.green, borderColour, false);
+            //texture.Apply();
+            // FloodFill((int)site.x, (int)site.y, Color.green);
         }
-
         texture.Apply();
         plane.GetComponent<MeshRenderer>().sharedMaterial.mainTexture = texture;
     }
 
-    void BoundaryFill4(int x, int y, Color colour, Color boundaryColour)
+    void BoundaryFill4(int x, int y, Color colour, Color boundaryColour,bool up)
     {
         if (!CompareColour(texture.GetPixel(x, y), colour) && texture.GetPixel(x, y) != boundaryColour)
         {
             if (x >= 0 && x <= mapWidth - 1 && y >= 0 && y <= mapHeight - 1)
             {
                 texture.SetPixel(x, y, colour);
-                texture.Apply();
-                BoundaryFill4(x + 1, y, colour, boundaryColour);
-                BoundaryFill4(x, y + 1, colour, boundaryColour);
-                //BoundaryFill4(x - 1, y, colour, boundaryColour);
-                //BoundaryFill4(x, y - 1, colour, boundaryColour);
+                //texture.Apply();
+                BoundaryFill4(x + 1, y, colour, boundaryColour, up);
+                BoundaryFill4(x - 1, y, colour, boundaryColour, up);
+                if (up)
+                    BoundaryFill4(x, y + 1, colour, boundaryColour, up);              
+                else
+                    BoundaryFill4(x, y - 1, colour, boundaryColour, up);
+
+            }
+            else
+            {
+                Debug.Log("("+x + ";" + y + ")");
             }
         }
     }
@@ -141,8 +149,8 @@ public class MapGeneration2D : MonoBehaviour
         texture.Apply();
         FloodFill(x, y + 1, replacement);
         FloodFill(x, y - 1, replacement);
-        FloodFill(x+1, y, replacement);
-        FloodFill(x - 1, y, replacement);
+        //FloodFill(x+1, y, replacement);
+        //FloodFill(x - 1, y, replacement);
         return;
     }
         
@@ -163,7 +171,7 @@ public class MapGeneration2D : MonoBehaviour
                 texture.SetPixel(i, j, Color.white);
             }
         }
-        texture.Apply();
+       // texture.Apply();
     }
 
     void RandomizePoints(int seed)
