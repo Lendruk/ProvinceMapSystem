@@ -52,7 +52,7 @@ public class MapGeneration2D : MonoBehaviour
     void Draw()
     {
         texture = new Texture2D(mapWidth, mapHeight);
-        FillWhite();
+      
         Debug.Log(map_points.Count);
         for (int i = 0; i < map_points.Count; i++)
         {
@@ -104,56 +104,14 @@ public class MapGeneration2D : MonoBehaviour
                     texture.SetPixel(x,y, borderColour);
                 }
             }
-            //texture.Apply();
-            //Fill Center
-             //if (i == 0)
-               // BoundaryFill4((int)site.x, (int)site.y, Color.green, borderColour,true);
-                BoundaryFill4((int)site.x, (int)site.y, Color.green, borderColour, false);
-            //texture.Apply();
-            // FloodFill((int)site.x, (int)site.y, Color.green);
+            
+           //Fill Center
+           texture.FloodFillBorder((int)site.x, (int)site.y, Color.green, borderColour);  
         }
         texture.Apply();
         plane.GetComponent<MeshRenderer>().sharedMaterial.mainTexture = texture;
     }
 
-    void BoundaryFill4(int x, int y, Color colour, Color boundaryColour,bool up)
-    {
-        if (!CompareColour(texture.GetPixel(x, y), colour) && texture.GetPixel(x, y) != boundaryColour)
-        {
-            if (x >= 0 && x <= mapWidth - 1 && y >= 0 && y <= mapHeight - 1)
-            {
-                texture.SetPixel(x, y, colour);
-                //texture.Apply();
-                BoundaryFill4(x + 1, y, colour, boundaryColour, up);
-                BoundaryFill4(x - 1, y, colour, boundaryColour, up);
-                if (up)
-                    BoundaryFill4(x, y + 1, colour, boundaryColour, up);              
-                else
-                    BoundaryFill4(x, y - 1, colour, boundaryColour, up);
-
-            }
-            else
-            {
-                Debug.Log("("+x + ";" + y + ")");
-            }
-        }
-    }
-    void FloodFill(int x,int y,Color replacement)
-    {
-        Color cur = texture.GetPixel(x, y);
-        if (CompareColour(cur, replacement))
-            return;
-        if (cur != Color.white)
-            return;
-        texture.SetPixel(x, y, replacement);
-        texture.Apply();
-        FloodFill(x, y + 1, replacement);
-        FloodFill(x, y - 1, replacement);
-        //FloodFill(x+1, y, replacement);
-        //FloodFill(x - 1, y, replacement);
-        return;
-    }
-        
     bool CompareColour(Color c1 ,Color c2)
     {
         if((int)(c1.r * 1000) == (int)(c2.r * 1000) && (int)(c1.g * 1000) == (int)(c2.g * 1000) && (int)(c1.b * 1000) == (int)(c2.b * 1000))
@@ -162,18 +120,6 @@ public class MapGeneration2D : MonoBehaviour
         }
         return false;
     }
-    void FillWhite()
-    {
-        for (int i = 0; i < mapWidth; i++)
-        {
-            for (int j = 0; j < mapHeight; j++)
-            {
-                texture.SetPixel(i, j, Color.white);
-            }
-        }
-       // texture.Apply();
-    }
-
     void RandomizePoints(int seed)
     {
         if (seed == 0)
