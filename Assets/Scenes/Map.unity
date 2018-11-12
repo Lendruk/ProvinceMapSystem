@@ -355,11 +355,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 151dc1a208107af469f58af1bbe87154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 300
-  mapHeight: 300
+  mapWidth: 500
+  mapHeight: 500
   relaxations: 2
-  pointCount: 30
-  seed: 300
+  pointCount: 200
+  seed: 1235
+  waterThreshold: 0.4
   parent: {fileID: 704578621}
   plane: {fileID: 704578617}
   borderColour: {r: 0, g: 0, b: 0, a: 1}

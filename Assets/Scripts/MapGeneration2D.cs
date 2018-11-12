@@ -11,6 +11,8 @@ public class MapGeneration2D : MonoBehaviour
     public int relaxations;
     public int pointCount;
     public int seed;
+    [Range(0,1)]
+    public float waterThreshold;
     public Transform parent;
     public GameObject plane;
 
@@ -22,6 +24,12 @@ public class MapGeneration2D : MonoBehaviour
     private Texture2D texture;
 
     public Color borderColour;
+
+    public static int NOISE_SCALE = 5;
+    public static int OCTAVES = 4;
+    public static float PERSISTANCE = .5f;
+    public static int LACUNARITY = 2;
+
 
     private void Start()
     {
@@ -104,21 +112,26 @@ public class MapGeneration2D : MonoBehaviour
                     texture.SetPixel(x,y, borderColour);
                 }
             }
-            
-           //Fill Center
-           texture.FloodFillBorder((int)site.x, (int)site.y, Color.green, borderColour);  
+
+            //Fill Center
+            //texture.FloodFillBorder((int)site.x, (int)site.y, Color.green, borderColour);  
+            float[,] noiseLayer = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, NOISE_SCALE, OCTAVES, PERSISTANCE, LACUNARITY, new Vector2(0, 0));
+            int tempx = (int)site.x; int tempy = (int)site.y;
+            if (noiseLayer[tempx, tempy] > waterThreshold)
+            {
+                cell.biome = Biomes.GetBiome("Grasslands");
+                texture.FloodFillBorder(tempx, tempy, cell.biome.biomeColour, borderColour);
+            }
+
+            else
+            {
+                cell.biome = Biomes.GetBiome("Ocean");
+                texture.FloodFillBorder(tempx, tempy, cell.biome.biomeColour, borderColour);
+            }
+                
         }
         texture.Apply();
         plane.GetComponent<MeshRenderer>().sharedMaterial.mainTexture = texture;
-    }
-
-    bool CompareColour(Color c1 ,Color c2)
-    {
-        if((int)(c1.r * 1000) == (int)(c2.r * 1000) && (int)(c1.g * 1000) == (int)(c2.g * 1000) && (int)(c1.b * 1000) == (int)(c2.b * 1000))
-        {
-            return true;
-        }
-        return false;
     }
     void RandomizePoints(int seed)
     {
