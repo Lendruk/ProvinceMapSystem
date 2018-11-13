@@ -53,7 +53,11 @@ public class MapGeneration2D : MonoBehaviour
         
         map_edges = voronoi.VoronoiDiagram();
         if (relaxations > 0)
+        {
             map_points = voronoi.SiteCoordinates();
+            
+        }
+            
 
         //map_spanningTree = voronoi.SpanningTree(KruskalType.MINIMUM);
 
@@ -74,8 +78,9 @@ public class MapGeneration2D : MonoBehaviour
                 neighbours = voronoi.NeighborSitesForSite(site),
                 ID = i,      
             };
-            cell.isBorder = IsBorder(voronoi.VoronoiBoundaryForSite(site));
-            ;
+            //cell.isBorder = IsBorder(voronoi.VoronoiBoundaryForSite(site));
+            cell.isBorder = HullContainsSite(site);
+            
 
 
             foreach (LineSegment segment in voronoi.VoronoiBoundaryForSite(site))
@@ -130,6 +135,8 @@ public class MapGeneration2D : MonoBehaviour
                 texture.FloodFillBorder(tempx, tempy, cell.biome.biomeColour, borderColour);
                 continue;
             }
+            continue;
+
             float[,] noiseLayer = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, NOISE_SCALE, OCTAVES, PERSISTANCE, LACUNARITY, new Vector2(0, 0));
             
             if (noiseLayer[tempx, tempy] > waterThreshold)
@@ -162,37 +169,46 @@ public class MapGeneration2D : MonoBehaviour
             map_points.Add(new Vector2(Random.Range(0, mapWidth), Random.Range(0, mapHeight)));
         }
     }
+    bool HullContainsSite(Vector2 p)
+    {
+        foreach(Edge e in voronoi.HullEdges())
+        {
+            if (e.LeftSite.Coordinate == p || e.RightSite.Coordinate == p)
+                return true;
+        }
+        return false;
+    }
+
     bool IsBorder(List<LineSegment> edges)
     {
-        
         Vector2[] points = new Vector2[edges.Count * 2];
         for (int i = 0; i < edges.Count; i++)
         {
             points[i] = edges[i].P0;
             points[i + 1] = edges[i].P1;
+            i++;
         }
+        int count = 0;
         for (int j = 0; j < points.Length; j++)
         {
-            int count = 0;
-            Vector2[] tempPoints = points;
-            Vector2 cur = tempPoints[j];
+            count = 0;
            
+            Vector2 cur = points[j];
             for (int i = 0; i < points.Length; i++)
             {
+               
                 if (i == j)
                     continue;
-                if (cur.x == tempPoints[i].x && cur.y == tempPoints[i].y)
+                if (cur.x == points[i].x && cur.y == points[i].y)
                 {
                     count++;
-                    break;
+                    continue;
                 }
-
-                         
+               
             }
             if (count == 0)
-                return true;
+                return true;     
         }
-
         return false;
     }
 
