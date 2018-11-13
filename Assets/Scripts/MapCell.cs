@@ -13,8 +13,11 @@ public class MapCell{
 
     public List<MapEdge> edges;
 
-    public Vector2 position { get; set; }
+    public Vector2 Position { get; set; }
 
+    public List<Vector2> neighbours;
+
+    public bool isBorder;
 
     public void SetBiome(Biome biome)
     {

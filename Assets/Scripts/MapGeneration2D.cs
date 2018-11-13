@@ -19,6 +19,8 @@ public class MapGeneration2D : MonoBehaviour
     private List<Vector2> map_points;
     private List<LineSegment> map_edges;
     private List<uint> colours;
+    private List<MapCell> cells;
+
 
     private Voronoi voronoi;
     private Texture2D texture;
@@ -48,7 +50,7 @@ public class MapGeneration2D : MonoBehaviour
     {
         
         voronoi = new Voronoi(map_points, new Rect(0, 0, mapWidth, mapHeight), relaxations);
-
+        
         map_edges = voronoi.VoronoiDiagram();
         if (relaxations > 0)
             map_points = voronoi.SiteCoordinates();
@@ -60,22 +62,27 @@ public class MapGeneration2D : MonoBehaviour
     void Draw()
     {
         texture = new Texture2D(mapWidth, mapHeight);
-      
+        cells = new List<MapCell>(); 
         Debug.Log(map_points.Count);
         for (int i = 0; i < map_points.Count; i++)
         {
             Vector2 site = map_points[i];
             MapCell cell = new MapCell
             {
-                position = site,
+                Position = site,
                 edges = new List<MapEdge>(),
+                neighbours = voronoi.NeighborSitesForSite(site),
+                ID = i,      
             };
+            cell.isBorder = IsBorder(voronoi.VoronoiBoundaryForSite(site));
+            ;
+
 
             foreach (LineSegment segment in voronoi.VoronoiBoundaryForSite(site))
             {
                 cell.edges.Add(new MapEdge(segment.P0, segment.P1));
             }
-
+            
 
             // Paint edges
             for (int j = 0; j < cell.edges.Count; j++)
@@ -114,9 +121,17 @@ public class MapGeneration2D : MonoBehaviour
             }
 
             //Fill Center
-            //texture.FloodFillBorder((int)site.x, (int)site.y, Color.green, borderColour);  
-            float[,] noiseLayer = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, NOISE_SCALE, OCTAVES, PERSISTANCE, LACUNARITY, new Vector2(0, 0));
+            //Temporary fill to have land and water
+
             int tempx = (int)site.x; int tempy = (int)site.y;
+            if (cell.isBorder)
+            {
+                cell.biome = Biomes.GetBiome("Ocean");
+                texture.FloodFillBorder(tempx, tempy, cell.biome.biomeColour, borderColour);
+                continue;
+            }
+            float[,] noiseLayer = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, NOISE_SCALE, OCTAVES, PERSISTANCE, LACUNARITY, new Vector2(0, 0));
+            
             if (noiseLayer[tempx, tempy] > waterThreshold)
             {
                 cell.biome = Biomes.GetBiome("Grasslands");
@@ -146,6 +161,50 @@ public class MapGeneration2D : MonoBehaviour
            // colours.Add(0);
             map_points.Add(new Vector2(Random.Range(0, mapWidth), Random.Range(0, mapHeight)));
         }
+    }
+    bool IsBorder(List<LineSegment> edges)
+    {
+        
+        Vector2[] points = new Vector2[edges.Count * 2];
+        for (int i = 0; i < edges.Count; i++)
+        {
+            points[i] = edges[i].P0;
+            points[i + 1] = edges[i].P1;
+        }
+        for (int j = 0; j < points.Length; j++)
+        {
+            int count = 0;
+            Vector2[] tempPoints = points;
+            Vector2 cur = tempPoints[j];
+           
+            for (int i = 0; i < points.Length; i++)
+            {
+                if (i == j)
+                    continue;
+                if (cur.x == tempPoints[i].x && cur.y == tempPoints[i].y)
+                {
+                    count++;
+                    break;
+                }
+
+                         
+            }
+            if (count == 0)
+                return true;
+        }
+
+        return false;
+    }
+
+    bool ContainsSite(Vector2 site)
+    {
+        foreach(MapCell cell in cells)
+        {
+            
+            if (cell.Position == site)
+                return true;
+        }
+        return false;
     }
 }
   

@@ -48,8 +48,8 @@ public class MapGeneration : MonoBehaviour {
         {
             MapCell cell = cells[i];
 
-            var x = cell.position.x * Random.Range(0, 9999);
-            var y = cell.position.y * Random.Range(0, 9999);
+            var x = cell.Position.x * Random.Range(0, 9999);
+            var y = cell.Position.y * Random.Range(0, 9999);
             var perlin = Mathf.PerlinNoise(x,y);
             Debug.Log(perlin);
             if (perlin < waterThreshold)
@@ -66,8 +66,8 @@ public class MapGeneration : MonoBehaviour {
         for (int i = 0; i < cells.Count; i++)
         {
             MapCell cell = cells[i];
-            int x = (int)cell.position.x;
-            int y = (int)cell.position.y;
+            int x = (int)cell.Position.x;
+            int y = (int)cell.Position.y;
             float height = noise[x, y];
 
             if(height <waterThreshold)

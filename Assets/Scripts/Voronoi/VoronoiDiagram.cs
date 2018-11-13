@@ -211,7 +211,7 @@ public class VoronoiDiagram : MonoBehaviour {
             {
                 ID = i1,
                 voronoiCell = go,
-                position = site
+                Position = site
             };
             go.transform.SetParent(cellHolder.transform);
             cells.Add(cell);
