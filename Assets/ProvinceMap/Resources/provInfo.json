@@ -1,0 +1,340 @@
+{
+    "Items": [
+        {
+            "provinceID": 1,
+            "provinceColour": {
+                "r": 255,
+                "g": 255,
+                "b": 0,
+                "a": 255
+            },
+            "provinceName": "Southern Orig",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [
+                    0
+                ],
+                "m_values": [
+                    {
+                        "ruralPop": 198,
+                        "urbanPop": 37,
+                        "aristoPop": 2
+                    }
+                ]
+            },
+            "religions": {
+                "m_keys": [
+                    0
+                ],
+                "m_values": [
+                    {
+                        "percentage": 15.0
+                    }
+                ]
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 2,
+            "provinceColour": {
+                "r": 255,
+                "g": 100,
+                "b": 0,
+                "a": 255
+            },
+            "provinceName": "Orig",
+            "provinceDescription": "City of Orig",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 3,
+            "provinceColour": {
+                "r": 255,
+                "g": 10,
+                "b": 0,
+                "a": 255
+            },
+            "provinceName": "Tigur",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 4,
+            "provinceColour": {
+                "r": 50,
+                "g": 60,
+                "b": 100,
+                "a": 255
+            },
+            "provinceName": "Tagur",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 5,
+            "provinceColour": {
+                "r": 50,
+                "g": 100,
+                "b": 60,
+                "a": 255
+            },
+            "provinceName": "Tornur",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 6,
+            "provinceColour": {
+                "r": 200,
+                "g": 90,
+                "b": 200,
+                "a": 255
+            },
+            "provinceName": "Toril",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 7,
+            "provinceColour": {
+                "r": 70,
+                "g": 60,
+                "b": 100,
+                "a": 255
+            },
+            "provinceName": "Tarol",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 8,
+            "provinceColour": {
+                "r": 90,
+                "g": 90,
+                "b": 40,
+                "a": 255
+            },
+            "provinceName": "luvinlon",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 9,
+            "provinceColour": {
+                "r": 100,
+                "g": 50,
+                "b": 50,
+                "a": 255
+            },
+            "provinceName": "Upper Togir",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 10,
+            "provinceColour": {
+                "r": 50,
+                "g": 100,
+                "b": 50,
+                "a": 255
+            },
+            "provinceName": "Torga",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 11,
+            "provinceColour": {
+                "r": 255,
+                "g": 0,
+                "b": 0,
+                "a": 255
+            },
+            "provinceName": "province11",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 12,
+            "provinceColour": {
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "a": 255
+            },
+            "provinceName": "Targa",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 13,
+            "provinceColour": {
+                "r": 50,
+                "g": 50,
+                "b": 100,
+                "a": 255
+            },
+            "provinceName": "Togir",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        },
+        {
+            "provinceID": 14,
+            "provinceColour": {
+                "r": 90,
+                "g": 90,
+                "b": 200,
+                "a": 255
+            },
+            "provinceName": "Pangea",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "cultureList": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "religions": {
+                "m_keys": [],
+                "m_values": []
+            },
+            "provinceRuralAtraction": 0.0,
+            "provinceUrbanAtraction": 0.0,
+            "naturalGrowth": 0.0
+        }
+    ]
+}

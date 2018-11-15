@@ -1,0 +1,4 @@
+1#Plains
+2#Forest
+3#Coast
+4#Desert
