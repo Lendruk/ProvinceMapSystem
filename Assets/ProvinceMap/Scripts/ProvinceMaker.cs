@@ -12,7 +12,8 @@ public class ProvinceMaker : MonoBehaviour
     public ImageSplitter spliter;
     public Camera cam;
     public Texture2D mapBmp;
-    public Terrain terrain;
+    public Transform labelHolder;
+    //public Terrain terrain;
 	//public TerrainGrid grid;
 
     [Header("Map Config")]
@@ -42,9 +43,9 @@ public class ProvinceMaker : MonoBehaviour
         //BuildBasicInfo();
         BuildProvinceInfo();
 		//BuildMeshes ();
-        BuildProvinceTerrain();
+        //BuildProvinceTerrain();
 
-        AddProvincesToCountries();
+        //AddProvincesToCountries();
 
         BuildText();
     }
@@ -65,7 +66,7 @@ public class ProvinceMaker : MonoBehaviour
     }
     public void BuildBasicInfo()
     {
-        string[] data = File.ReadAllLines("Assets/Map/provBasic.txt");
+        string[] data = File.ReadAllLines("Assets/ProvinceMap/Resources/provBasic.txt");
 
         foreach (string entry in data)
         {
@@ -80,7 +81,7 @@ public class ProvinceMaker : MonoBehaviour
             GameObject go = new GameObject();
             go.name = "provinceID: " + prov.provinceID;
             Province province = go.AddComponent<Province>();
-            province.provinceInfo = prov;
+            province.ProvinceInfo = prov;
 
             BuildBorders(province);
             go.transform.SetParent(this.transform);
@@ -89,7 +90,7 @@ public class ProvinceMaker : MonoBehaviour
     }
     public void BuildProvinceInfo()
     {
-        string jsonData = File.ReadAllText("Assets/Map/provInfo.json");
+        string jsonData = File.ReadAllText("Assets/ProvinceMap/Resources/provInfo.json");
         ProvinceInfo[] info = JsonHelper.FromJson<ProvinceInfo>(jsonData);
 
         foreach (ProvinceInfo i in info)
@@ -97,10 +98,10 @@ public class ProvinceMaker : MonoBehaviour
             GameObject go = new GameObject();
             go.name = "provinceID: " + i.provinceID;
             Province province = go.AddComponent<Province>();
-            province.provinceInfo = i;
+            province.ProvinceInfo = i;
             i.UpdatePopulation();
 
-            province.UpdateAtributes();
+            
 
             BuildBorders(province);
             go.transform.SetParent(this.transform);
@@ -109,14 +110,14 @@ public class ProvinceMaker : MonoBehaviour
     }
     public void BuildProvinceTerrain()
     {
-        string[] data = File.ReadAllLines("Assets/Map/provTerrain.txt");
+        string[] data = File.ReadAllLines("Assets/ProvinceMap/Resources/provTerrain.txt");
 
         foreach (string entry in data)
         {
             string[] elements = entry.Split('#');
             Province prov = ProvinceController.instance.GetProvince(int.Parse(elements[0]));
-            prov.provinceInfo.terrain = (ProvinceInfo.TerrainType)Enum.Parse(typeof(ProvinceInfo.TerrainType), elements[1]);
-            prov.UpdateAtributes();
+            prov.ProvinceInfo.terrain = (ProvinceInfo.TerrainType)Enum.Parse(typeof(ProvinceInfo.TerrainType), elements[1]);
+            
         }
     }
     public void AddProvincesToCountries()
@@ -130,7 +131,7 @@ public class ProvinceMaker : MonoBehaviour
             for (int j = 1; j < elements.Length; j++)
             {
                 Province prov = ProvinceController.instance.GetProvince(int.Parse(elements[j]));
-                prov.provinceInfo.ownerID = ci.countryID;
+                prov.ProvinceInfo.ownerID = ci.countryID;
                 ci.provinces.Add(prov);
             }
             
@@ -144,31 +145,33 @@ public class ProvinceMaker : MonoBehaviour
             GameObject textGO = new GameObject();
             textGO.name = "ProvinceText";
 
-            
+            Transform tTransform = textGO.transform;
+            tTransform.SetParent(labelHolder);
+            tTransform.localScale = Vector3.one;
+            Vector3 center = prov.ProvinceInfo.center;
+            tTransform.position = new Vector3(center.x, 0.35f, center.y);
+            tTransform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
+
             TextMeshPro text = textGO.AddComponent<TextMeshPro>();
-            text.text = prov.provinceInfo.provinceName;
-            text.color = CountryList.instance.GetCountry(prov.provinceInfo.ownerID).countryColour;
+            text.text = prov.ProvinceInfo.provinceName;
+            //text.color = CountryList.instance.GetCountry(prov.ProvinceInfo.ownerID).countryColour;
+            text.color = Color.white;
            
 
 
-            Transform tTransform = textGO.transform;
-            tTransform.SetParent(go.transform);
-            tTransform.localScale = Vector3.one;
-            Vector3 center = prov.provinceInfo.center;
-            tTransform.position = new Vector3(center.x, terrain.SampleHeight(new Vector3(center.x,0,center.y))+0.35f, center.y);
-            tTransform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
+
         }
     }
     public void BuildBorders(Province prov)
     {
         foreach (ImageCell cell in spliter.cells)
         {
-            if (cell.cell_Color == prov.provinceInfo.provinceColour)
+            if (cell.cell_Color == prov.ProvinceInfo.provinceColour)
             {
 				prov.border = cell.borderPoints;
 				prov.points = cell.points;
-                BuildProvinceBorder(prov.gameObject.transform, cell.borderPoints.ToArray());
-                prov.provinceInfo.center = cell.median_point;
+                //BuildProvinceBorder(prov.gameObject.transform, cell.borderPoints.ToArray());
+                prov.ProvinceInfo.center = cell.median_point;
                 break;
             }
         }
@@ -204,31 +207,12 @@ public class ProvinceMaker : MonoBehaviour
         }
     }
     */
-    public void BuildProvinceBorder(Transform parent, Vector3[] points)
-    {
-        LineRenderer line = parent.gameObject.AddComponent<LineRenderer>();
-        line.material = new Material(Shader.Find("Particles/Additive"));
-        line.startColor = borderColour;
-        line.endColor = borderColour;
-        line.startWidth = borderWidth;
-        line.endWidth = borderWidth;
-        line.positionCount = points.Length;
-        line.loop = true;
-        for (int i = 0; i < points.Length; i++)
-        {
-            
-			float y = terrain.SampleHeight(new Vector3(points[i].x,0,points[i].y)) + terrain.GetPosition().y;
-			if (y < Mathf.Abs(waterLevel))
-				y = Mathf.Abs(waterLevel);
-            line.SetPosition(i, new Vector3(points[i].x, y + borderYoffset, points[i].y));
-        }
-
-    }
+    
     void BuildMeshes()
     {
         foreach (Province prov in ProvinceController.instance.provinces)
         {
-			prov.mesh = MeshGenerator.BuildProvinceMeshes (prov.points, prov.transform, provinceMaterial,terrain,provinceMeshOffset);
+			//prov.mesh = MeshGenerator.BuildProvinceMeshes (prov.points, prov.transform, provinceMaterial,terrain,provinceMeshOffset);
 
         }
     }

@@ -6,9 +6,7 @@ using TMPro;
 
 public class Province : MonoBehaviour
 {
-
-    
-    public ProvinceInfo provinceInfo;
+    public ProvinceInfo ProvinceInfo;
 
     [ReadOnly]
     public Vector3 provinceCenter;
@@ -18,21 +16,16 @@ public class Province : MonoBehaviour
 	[System.NonSerialized]
 	public List<Vector2> points;
 
-	[System.NonSerialized]
-	public GameObject mesh;
 
-    public ProvinceInfo.TerrainType terrainType;
+   // public ProvinceInfo.TerrainType terrainType;
 
 
     // Use this for initialization
     void Start () {
-        provinceCenter = provinceInfo.center;
-        UpdateAtributes();
+        provinceCenter = ProvinceInfo.center;
+        
     }
-    public void UpdateAtributes()
-    {
-        terrainType = provinceInfo.terrain;
-    }
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -53,59 +46,61 @@ public class Province : MonoBehaviour
         
         TextMeshPro textM = gameObject.GetComponentInChildren<TextMeshPro>();
         if(textM != null){
-            textM.text = provinceInfo.provinceName;
+            textM.text = ProvinceInfo.provinceName;
         }
-        if(provinceInfo == null)
+        if(ProvinceInfo == null)
             return;
         
         
         
     }
+
+
     void UpdatePopulation()
     {
-        provinceInfo.UpdatePopulation();
+        ProvinceInfo.UpdatePopulation();
         
     }
     public int GetID()
     {
-        return provinceInfo.provinceID;
+        return ProvinceInfo.provinceID;
     }
     public bool IsTransversable()
     {
-        return provinceInfo.isTransversable;
+        return ProvinceInfo.isTransversable;
     }
     public string GetName()
     {
-        return provinceInfo.provinceName;
+        return ProvinceInfo.provinceName;
     }
 
     public void InitializeProvince()
     {
-        provinceInfo.provinceName = "Default";
+        ProvinceInfo.provinceName = "Default";
         Text text = GetComponentInChildren<Text>();
-        provinceInfo = new ProvinceInfo();
+        ProvinceInfo = new ProvinceInfo();
         text.fontSize = 16;
-        text.text = provinceInfo.provinceName;
+        text.text = ProvinceInfo.provinceName;
         text.transform.position = new Vector3(text.gameObject.transform.position.x, text.gameObject.transform.position.y, -3);
 
     }
     /*
     public void ApplyWeatherEffect()
     {
-        if (provinceInfo.weather == null)
+        if (ProvinceInfo.weather == null)
             return;
-        if (provinceInfo.weather.weatherEffect != null)
+        if (ProvinceInfo.weather.weatherEffect != null)
         {
-            GameObject effect = Instantiate(provinceInfo.weather.weatherEffect, this.transform);
+            GameObject effect = Instantiate(ProvinceInfo.weather.weatherEffect, this.transform);
             effect.transform.position = new Vector3(effect.transform.position.x, effect.transform.position.y, effect.transform.position.z + 3);
-            effect.tag = "prov" + provinceInfo.provinceID + "WE";
+            effect.tag = "prov" + ProvinceInfo.provinceID + "WE";
         }
     }
     public void RemoveWeatherEffect()
     {
-        GameObject effect = GameObject.FindGameObjectWithTag("prov" + provinceInfo.provinceID + "WE");
+        GameObject effect = GameObject.FindGameObjectWithTag("prov" + ProvinceInfo.provinceID + "WE");
         Destroy(effect);
-        provinceInfo.weather = WeatherList.GetWeather(WeatherEnum.CLEAR);
+        ProvinceInfo.weather = WeatherList.GetWeather(WeatherEnum.CLEAR);
     }
     */
 

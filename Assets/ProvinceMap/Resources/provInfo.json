@@ -1,42 +1,30 @@
 {
     "Items": [
-        {
-            "provinceID": 1,
-            "provinceColour": {
-                "r": 255,
-                "g": 255,
-                "b": 0,
-                "a": 255
-            },
-            "provinceName": "Southern Orig",
-            "provinceDescription": "Default",
-            "isTransversable": true,
-            "cultureList": {
-                "m_keys": [
-                    0
-                ],
-                "m_values": [
-                    {
-                        "ruralPop": 198,
-                        "urbanPop": 37,
-                        "aristoPop": 2
-                    }
-                ]
-            },
-            "religions": {
-                "m_keys": [
-                    0
-                ],
-                "m_values": [
-                    {
-                        "percentage": 15.0
-                    }
-                ]
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+      {
+        "provinceID": 1,
+        "provinceColour": {
+          "r": 255,
+          "g": 255,
+          "b": 0,
+          "a": 255
         },
+        "provinceName": "Southern Orig",
+        "provinceDescription": "Default",
+        "isTransversable": true,
+        "provCultures": [
+          {
+            "ruralPop": 5,
+            "urbanPop": 3,
+            "aristoPop": 2,
+            "culture": 1,
+            "race": 1,
+            "religion": 1
+          }
+        ],
+          "provinceRuralAtraction" : 0.0,
+          "provinceUrbanAtraction" : 0.0,
+          "naturalGrowth" : 0.0
+      },
         {
             "provinceID": 2,
             "provinceColour": {

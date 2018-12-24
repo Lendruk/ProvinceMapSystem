@@ -37,12 +37,19 @@ public class ImageRayDetector : MonoBehaviour {
         pixelUV.y *= tex.height;
         Color32 clr = tex.GetPixel((int)pixelUV.x,(int) pixelUV.y);
 
-
+        Debug.Log("Ray Hit");
         //if (KeybindManager.singleton.isBusy())
-         //   return;
+        //   return;
 
-       // UIHelper.instance.OpenProv(ProvinceController.instance.GetProvinceByColour(clr));
-
+        // UIHelper.instance.OpenProv(ProvinceController.instance.GetProvinceByColour(clr));
+        Province prov = ProvinceController.instance.GetProvinceByColour(clr);
+        if(prov != null)
+        {
+            Debug.Log(prov.ProvinceInfo.provinceName);
+            ProvinceController.instance.DeleteBorders();
+            ProvinceController.instance.BuildProvinceBorder(prov.border.ToArray(), Color.black);
+        }
+            
         //Debug.Log((int)pixelUV.x);
         //Debug.Log((int)pixelUV.y);
 

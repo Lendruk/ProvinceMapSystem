@@ -123,7 +123,7 @@ public class ImageSplitter{
     }
     public void SplitByBorderOrdered()
     {
-        string[] data = File.ReadAllLines("Assets/Map/provBasic.txt");
+        string[] data = File.ReadAllLines("Assets/ProvinceMap/Resources/provBasic.txt");
         
         foreach(string str in data)
         {

@@ -135,7 +135,7 @@ public class MapGeneration2D : MonoBehaviour
                 texture.FloodFillBorder(tempx, tempy, cell.biome.biomeColour, borderColour);
                 continue;
             }
-            continue;
+            
 
             float[,] noiseLayer = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, NOISE_SCALE, OCTAVES, PERSISTANCE, LACUNARITY, new Vector2(0, 0));
             

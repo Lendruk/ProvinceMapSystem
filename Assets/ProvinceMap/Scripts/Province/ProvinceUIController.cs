@@ -23,7 +23,7 @@ public class ProvinceUIController : MonoBehaviour {
         if (province == currentProvince) return;
 
 
-        ProvinceInfo pop = province.provinceInfo;
+        ProvinceInfo pop = province.ProvinceInfo;
         float[] temp = { pop.ruralPopulation, pop.urbanPopulation, pop.aristocraticPopulation };
 
 
@@ -34,7 +34,7 @@ public class ProvinceUIController : MonoBehaviour {
         provinceName.text = currentProvince.GetName();
 
 
-       //culturePieGraph.MakeCultureGraph(province.provinceInfo);
+       //culturePieGraph.MakeCultureGraph(province.ProvinceInfo);
 
         religionText.text += "\n"+pop.GetMajorityReligion().religionName;
 

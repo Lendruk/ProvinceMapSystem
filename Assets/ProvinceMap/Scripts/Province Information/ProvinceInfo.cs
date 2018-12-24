@@ -60,10 +60,10 @@ public class ProvinceInfo
     //public ReligionPercentageDictionary religions;
 
     // Incremental Factors;
-    public float provinceRuralAtraction; // indicates rural population  immigration
-    public float provinceUrbanAtraction; // indicates urban population immigration
+    //public float provinceRuralAtraction; // indicates rural population  immigration
+    //public float provinceUrbanAtraction; // indicates urban population immigration
 
-    public float naturalGrowth; // Population growth
+    //public float naturalGrowth; // Population growth
 
     public ProvinceInfo(int rural,int urban,int aristo,string provinceName,string description,bool isTransversable)
     {
@@ -177,8 +177,6 @@ public class ProvinceInfo
     {
         Plains,Forest,Coast,Ocean,Lake,River,Desert,Grasslands
     }
-
-    [System.NonSerialized]
     public TerrainType terrain;
     #endregion
 
