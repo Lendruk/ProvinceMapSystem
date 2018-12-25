@@ -42,10 +42,9 @@ public class ProvinceMaker : MonoBehaviour
         //OrderPositions();
         //BuildBasicInfo();
         BuildProvinceInfo();
-		//BuildMeshes ();
         //BuildProvinceTerrain();
-
-        //AddProvincesToCountries();
+        LoadCountries();
+        AddProvincesToCountries();
 
         BuildText();
     }
@@ -122,17 +121,21 @@ public class ProvinceMaker : MonoBehaviour
     }
     public void AddProvincesToCountries()
     {
-        string[] data = File.ReadAllLines("Assets/ProvinceRefactor/Country/CountryProvinces.txt");
+        string[] data = File.ReadAllLines("Assets/ProvinceMap/Resources/countryProvs.txt");
 
-        for (int i = 1; i < data.Length; i++)
+        for (int i = 0; i < data.Length; i++)
         {
             string[] elements = data[i].Split('#');
-            CountryInfo ci = CountryList.instance.GetCountry(int.Parse(elements[0]));
+            Country ci = ProvinceController.instance.GetCountry(elements[0]);
             for (int j = 1; j < elements.Length; j++)
             {
                 Province prov = ProvinceController.instance.GetProvince(int.Parse(elements[j]));
-                prov.ProvinceInfo.ownerID = ci.countryID;
-                ci.provinces.Add(prov);
+                prov.ProvinceInfo.ownerID = ci.info.countryID;
+                prov.ProvinceInfo.ownerTag = ci.info.tag;
+                prov.ProvinceInfo.owner = ci;
+                
+                ci.AddProvince(prov);
+                
             }
             
         }
@@ -154,11 +157,8 @@ public class ProvinceMaker : MonoBehaviour
 
             TextMeshPro text = textGO.AddComponent<TextMeshPro>();
             text.text = prov.ProvinceInfo.provinceName;
-            //text.color = CountryList.instance.GetCountry(prov.ProvinceInfo.ownerID).countryColour;
-            text.color = Color.white;
-           
 
-
+            text.color = (prov.ProvinceInfo.owner != null) ?  prov.ProvinceInfo.owner.info.countryColour : Color.white;  
 
         }
     }
@@ -178,6 +178,9 @@ public class ProvinceMaker : MonoBehaviour
     }
     public void LoadCountries()
     {
+        string jsonData = File.ReadAllText("Assets/ProvinceMap/Resources/countries.json");
+        CountryInfo[] countries = JsonHelper.FromJson<CountryInfo>(jsonData);
+        ProvinceController.instance.AddCountries(countries);
 
     }
     public void ScaleObject(Renderer renderer, float width, float length)
@@ -207,15 +210,7 @@ public class ProvinceMaker : MonoBehaviour
         }
     }
     */
-    
-    void BuildMeshes()
-    {
-        foreach (Province prov in ProvinceController.instance.provinces)
-        {
-			//prov.mesh = MeshGenerator.BuildProvinceMeshes (prov.points, prov.transform, provinceMaterial,terrain,provinceMeshOffset);
-
-        }
-    }
+   
     List<Vector2> ConvertVectors(List<Vector3> vectors)
     {
         List<Vector2> v2 = new List<Vector2>();

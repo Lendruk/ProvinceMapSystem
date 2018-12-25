@@ -8,6 +8,8 @@ public class ProvinceController : MonoBehaviour {
 
     public List<Province> provinces = new List<Province>();
 
+    public List<Country> countries = new List<Country>();
+
     private void Awake()
     {
         if (instance == null)
@@ -18,6 +20,26 @@ public class ProvinceController : MonoBehaviour {
         provinces.Add(provinceObject);
 
     }
+    public void AddCountries(CountryInfo[] countries)
+    {
+        foreach (CountryInfo country in countries)
+        {
+            Country newCountry = new Country();
+            newCountry.info = country;
+            this.countries.Add(newCountry);
+        }
+    }
+
+    public Country GetCountry(string tag)
+    {
+        foreach(Country country in countries)
+        {
+            if (country.info.tag == tag)
+                return country;
+        }
+        return null;
+    }
+
     public Province GetProvince(int id)
     {
         for (int i = 0; i < provinces.Count; i++)

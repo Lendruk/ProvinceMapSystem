@@ -54,6 +54,12 @@ public class ProvinceInfo
 
     [System.NonSerialized]
     public int ownerID;
+
+    [System.NonSerialized]
+    public string ownerTag;
+
+    [System.NonSerialized]
+    public Country owner;
     //public CulturePopulationDictionary cultureList;
 
     //Religion

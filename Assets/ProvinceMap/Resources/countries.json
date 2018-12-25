@@ -1,0 +1,16 @@
+{
+  "Items": [
+    {
+      "countryID": 0,
+      "countryName": "Toguria",
+      "tag": "TOG",
+      "stateReligion": 0,
+      "countryColour": {
+        "r": 255,
+        "g": 0,
+        "b": 0,
+        "a": 255
+      }
+    }
+  ]
+}

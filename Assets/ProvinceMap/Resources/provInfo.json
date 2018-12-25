@@ -36,14 +36,16 @@
             "provinceName": "Orig",
             "provinceDescription": "City of Orig",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
+             "provCultures": [
+              {
+                "ruralPop": 1020,
+                "urbanPop": 350,
+                "aristoPop": 120,
+                "culture": 1,
+                "race": 1,
+                "religion": 1
+              }
+              ],
             "provinceRuralAtraction": 0.0,
             "provinceUrbanAtraction": 0.0,
             "naturalGrowth": 0.0
