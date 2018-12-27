@@ -4,7 +4,7 @@ using System.IO;
 using System;
 using UnityEngine;
 using TMPro;
-
+using System.Linq;
 public class ProvinceMaker : MonoBehaviour
 {
     public static ProvinceMaker instance;
@@ -20,11 +20,11 @@ public class ProvinceMaker : MonoBehaviour
 
     public Color borderColour;
 	public Material provinceMaterial;
-    public float borderWidth;
+    //public float borderWidth;
     public float sphereRadius;
     public float borderYoffset = 0f;
-	public float provinceMeshOffset = 0f;
-	public float waterLevel;
+	//public float provinceMeshOffset = 0f;
+	//public float waterLevel;
     [Range(0.0f, 2.0f)]
     public float mapScale = 1.0f;
 
@@ -79,12 +79,12 @@ public class ProvinceMaker : MonoBehaviour
             //GameObject Creation
             GameObject go = new GameObject();
             go.name = "provinceID: " + prov.provinceID;
-            Province province = go.AddComponent<Province>();
-            province.ProvinceInfo = prov;
+            //Province province = go.AddComponent<Province>();
+            //province.ProvinceInfo = prov;
 
-            BuildBorders(province);
-            go.transform.SetParent(this.transform);
-            ProvinceController.instance.AddProvince(province);
+            //BuildBorders(province);
+            //go.transform.SetParent(this.transform);
+            //ProvinceController.instance.AddProvince(province);
         }
     }
     public void BuildProvinceInfo()
@@ -94,31 +94,36 @@ public class ProvinceMaker : MonoBehaviour
 
         foreach (ProvinceInfo i in info)
         {
-            GameObject go = new GameObject();
-            go.name = "provinceID: " + i.provinceID;
-            Province province = go.AddComponent<Province>();
-            province.ProvinceInfo = i;
+            
+            Province province = new Province(i);
+            
             i.UpdatePopulation();
 
             
 
             BuildBorders(province);
-            go.transform.SetParent(this.transform);
+            
             ProvinceController.instance.AddProvince(province);
         }
     }
-    public void BuildProvinceTerrain()
+    public void SaveProvinces()
     {
-        string[] data = File.ReadAllLines("Assets/ProvinceMap/Resources/provTerrain.txt");
+        string jsonData = JsonHelper.ToJson(ProvinceController.instance.provinces.Select(e => e.ProvinceInfo).ToArray(),true);
 
-        foreach (string entry in data)
-        {
-            string[] elements = entry.Split('#');
-            Province prov = ProvinceController.instance.GetProvince(int.Parse(elements[0]));
-            prov.ProvinceInfo.terrain = (ProvinceInfo.TerrainType)Enum.Parse(typeof(ProvinceInfo.TerrainType), elements[1]);
-            
-        }
+        File.WriteAllText("Assets/ProvinceMap/Resources/provInfo.json", jsonData);
     }
+    //public void BuildProvinceTerrain()
+    //{
+    //    string[] data = File.ReadAllLines("Assets/ProvinceMap/Resources/provTerrain.txt");
+
+    //    foreach (string entry in data)
+    //    {
+    //        string[] elements = entry.Split('#');
+    //        Province prov = ProvinceController.instance.GetProvince(int.Parse(elements[0]));
+    //        prov.ProvinceInfo.terrain = (ProvinceInfo.TerrainType)Enum.Parse(typeof(ProvinceInfo.TerrainType), elements[1]);
+            
+    //    }
+    //}
     public void AddProvincesToCountries()
     {
         string[] data = File.ReadAllLines("Assets/ProvinceMap/Resources/countryProvs.txt");
@@ -144,7 +149,7 @@ public class ProvinceMaker : MonoBehaviour
     {
         foreach (Province prov in ProvinceController.instance.provinces)
         {
-            GameObject go = prov.gameObject;
+            
             GameObject textGO = new GameObject();
             textGO.name = "ProvinceText";
 
@@ -182,6 +187,32 @@ public class ProvinceMaker : MonoBehaviour
         CountryInfo[] countries = JsonHelper.FromJson<CountryInfo>(jsonData);
         ProvinceController.instance.AddCountries(countries);
 
+    }
+    public void SaveCountries()
+    {
+        string jsonData = JsonHelper.ToJson(ProvinceController.instance.countries.Select(e=> e.info).ToArray(),true);
+        File.WriteAllText("Assets/ProvinceMap/Resources/countries.json",jsonData);
+        SaveOwnedProvinces();
+    }
+    public void SaveOwnedProvinces()
+    {
+        string data = "";
+        foreach(Country country in ProvinceController.instance.countries)
+        {
+            if (country.provinces.Count != 0)
+            {
+                data += country.info.tag + "#";
+                for (int i = 0; i < country.provinces.Count; i++)
+                {
+                    Province prov = country.provinces[i];
+                    data += prov.ProvinceInfo.provinceID;
+                    if (i != country.provinces.Count - 1)
+                        data += "#";
+                }
+                data += "\n";
+            }
+        }
+        Debug.Log(data);
     }
     public void ScaleObject(Renderer renderer, float width, float length)
     {

@@ -4,57 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Province : MonoBehaviour
+[System.Serializable]
+public class Province
 {
-    public ProvinceInfo ProvinceInfo;
-
     [ReadOnly]
-    public Vector3 provinceCenter;
+    public string name;
+    public ProvinceInfo ProvinceInfo;
 
 	[System.NonSerialized]
 	public List<Vector3> border;
 	[System.NonSerialized]
 	public List<Vector2> points;
 
-
-   // public ProvinceInfo.TerrainType terrainType;
-
-
-    // Use this for initialization
-    void Start () {
-        provinceCenter = ProvinceInfo.center;
-        
-    }
-
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    private void OnMouseDown()
+    public Province(ProvinceInfo info)
     {
-        GameObject ui = GameObject.FindGameObjectWithTag("ProvinceUICtrl");
-        ProvinceUIController uictrl = ui.GetComponent<ProvinceUIController>();
-        uictrl.ActivateUI();
-        uictrl.GiveInformation(this);
-        
+        this.ProvinceInfo = info;
+        name = ProvinceInfo.provinceName;
     }
-
-    private void OnValidate()
-    {
-        
-        TextMeshPro textM = gameObject.GetComponentInChildren<TextMeshPro>();
-        if(textM != null){
-            textM.text = ProvinceInfo.provinceName;
-        }
-        if(ProvinceInfo == null)
-            return;
-        
-        
-        
-    }
-
 
     void UpdatePopulation()
     {
@@ -74,16 +40,6 @@ public class Province : MonoBehaviour
         return ProvinceInfo.provinceName;
     }
 
-    public void InitializeProvince()
-    {
-        ProvinceInfo.provinceName = "Default";
-        Text text = GetComponentInChildren<Text>();
-        ProvinceInfo = new ProvinceInfo();
-        text.fontSize = 16;
-        text.text = ProvinceInfo.provinceName;
-        text.transform.position = new Vector3(text.gameObject.transform.position.x, text.gameObject.transform.position.y, -3);
-
-    }
     /*
     public void ApplyWeatherEffect()
     {

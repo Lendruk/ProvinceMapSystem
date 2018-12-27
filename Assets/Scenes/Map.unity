@@ -150,7 +150,6 @@ MonoBehaviour:
   labelHolder: {fileID: 1832150102}
   borderColour: {r: 0, g: 0, b: 0, a: 0}
   provinceMaterial: {fileID: 2100000, guid: dfaf4c2712c90e344b3848389b2aff68, type: 2}
-  borderWidth: 1
   sphereRadius: 0
   borderYoffset: 0
   provinceMeshOffset: 0
@@ -186,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   provBorders: {fileID: 1986397421}
   provinces: []
+  countries: []
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
+  - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -330,13 +331,29 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.21503225, y: -0, z: -0, w: 0.97660697}
-  m_LocalPosition: {x: 72.5, y: 68.51, z: -11.59}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 125, y: 172.6, z: 125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 24.835001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+--- !u!114 &534669906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bca0dfe50dc0034187c8a8a2faaef11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xSpeed: 1
+  zSpeed: 1
+  mapBounds: 250
+  zoomSpeed: 2.5
 --- !u!1 &704578617
 GameObject:
   m_ObjectHideFlags: 0

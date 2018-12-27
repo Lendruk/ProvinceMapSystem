@@ -1,30 +1,32 @@
 {
     "Items": [
-      {
-        "provinceID": 1,
-        "provinceColour": {
-          "r": 255,
-          "g": 255,
-          "b": 0,
-          "a": 255
+        {
+            "provinceID": 1,
+            "provinceColour": {
+                "r": 255,
+                "g": 255,
+                "b": 0,
+                "a": 255
+            },
+            "provinceName": "Southern Orig",
+            "provinceDescription": "Default",
+            "isTransversable": true,
+            "ruralPopulation": 5,
+            "urbanPopulation": 3,
+            "aristocraticPopulation": 2,
+            "totalPopulation": 10,
+            "provCultures": [
+                {
+                    "ruralPop": 5,
+                    "urbanPop": 3,
+                    "aristoPop": 2,
+                    "culture": 1,
+                    "race": 1,
+                    "religion": 1
+                }
+            ],
+            "terrain": 0
         },
-        "provinceName": "Southern Orig",
-        "provinceDescription": "Default",
-        "isTransversable": true,
-        "provCultures": [
-          {
-            "ruralPop": 5,
-            "urbanPop": 3,
-            "aristoPop": 2,
-            "culture": 1,
-            "race": 1,
-            "religion": 1
-          }
-        ],
-          "provinceRuralAtraction" : 0.0,
-          "provinceUrbanAtraction" : 0.0,
-          "naturalGrowth" : 0.0
-      },
         {
             "provinceID": 2,
             "provinceColour": {
@@ -36,19 +38,21 @@
             "provinceName": "Orig",
             "provinceDescription": "City of Orig",
             "isTransversable": true,
-             "provCultures": [
-              {
-                "ruralPop": 1020,
-                "urbanPop": 350,
-                "aristoPop": 120,
-                "culture": 1,
-                "race": 1,
-                "religion": 1
-              }
-              ],
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 1020,
+            "urbanPopulation": 350,
+            "aristocraticPopulation": 120,
+            "totalPopulation": 1490,
+            "provCultures": [
+                {
+                    "ruralPop": 1020,
+                    "urbanPop": 350,
+                    "aristoPop": 120,
+                    "culture": 1,
+                    "race": 1,
+                    "religion": 1
+                }
+            ],
+            "terrain": 0
         },
         {
             "provinceID": 3,
@@ -61,17 +65,12 @@
             "provinceName": "Tigur",
             "provinceDescription": "Default",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 0,
+            "urbanPopulation": 0,
+            "aristocraticPopulation": 0,
+            "totalPopulation": 0,
+            "provCultures": [],
+            "terrain": 0
         },
         {
             "provinceID": 4,
@@ -84,17 +83,12 @@
             "provinceName": "Tagur",
             "provinceDescription": "Default",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 0,
+            "urbanPopulation": 0,
+            "aristocraticPopulation": 0,
+            "totalPopulation": 0,
+            "provCultures": [],
+            "terrain": 0
         },
         {
             "provinceID": 5,
@@ -107,17 +101,12 @@
             "provinceName": "Tornur",
             "provinceDescription": "Default",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 0,
+            "urbanPopulation": 0,
+            "aristocraticPopulation": 0,
+            "totalPopulation": 0,
+            "provCultures": [],
+            "terrain": 0
         },
         {
             "provinceID": 6,
@@ -130,17 +119,12 @@
             "provinceName": "Toril",
             "provinceDescription": "Default",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 0,
+            "urbanPopulation": 0,
+            "aristocraticPopulation": 0,
+            "totalPopulation": 0,
+            "provCultures": [],
+            "terrain": 0
         },
         {
             "provinceID": 7,
@@ -153,17 +137,12 @@
             "provinceName": "Tarol",
             "provinceDescription": "Default",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 0,
+            "urbanPopulation": 0,
+            "aristocraticPopulation": 0,
+            "totalPopulation": 0,
+            "provCultures": [],
+            "terrain": 0
         },
         {
             "provinceID": 8,
@@ -176,17 +155,12 @@
             "provinceName": "luvinlon",
             "provinceDescription": "Default",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 0,
+            "urbanPopulation": 0,
+            "aristocraticPopulation": 0,
+            "totalPopulation": 0,
+            "provCultures": [],
+            "terrain": 0
         },
         {
             "provinceID": 9,
@@ -199,17 +173,12 @@
             "provinceName": "Upper Togir",
             "provinceDescription": "Default",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 0,
+            "urbanPopulation": 0,
+            "aristocraticPopulation": 0,
+            "totalPopulation": 0,
+            "provCultures": [],
+            "terrain": 0
         },
         {
             "provinceID": 10,
@@ -222,17 +191,12 @@
             "provinceName": "Torga",
             "provinceDescription": "Default",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 0,
+            "urbanPopulation": 0,
+            "aristocraticPopulation": 0,
+            "totalPopulation": 0,
+            "provCultures": [],
+            "terrain": 0
         },
         {
             "provinceID": 11,
@@ -242,20 +206,24 @@
                 "b": 0,
                 "a": 255
             },
-            "provinceName": "province11",
+            "provinceName": "Red Beach",
             "provinceDescription": "Default",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 120,
+            "urbanPopulation": 30,
+            "aristocraticPopulation": 50,
+            "totalPopulation": 200,
+            "provCultures": [
+                {
+                    "ruralPop": 120,
+                    "urbanPop": 30,
+                    "aristoPop": 50,
+                    "culture": 1,
+                    "race": 2,
+                    "religion": 2
+                }
+            ],
+            "terrain": 2
         },
         {
             "provinceID": 12,
@@ -268,17 +236,12 @@
             "provinceName": "Targa",
             "provinceDescription": "Default",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 0,
+            "urbanPopulation": 0,
+            "aristocraticPopulation": 0,
+            "totalPopulation": 0,
+            "provCultures": [],
+            "terrain": 0
         },
         {
             "provinceID": 13,
@@ -291,17 +254,12 @@
             "provinceName": "Togir",
             "provinceDescription": "Default",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 0,
+            "urbanPopulation": 0,
+            "aristocraticPopulation": 0,
+            "totalPopulation": 0,
+            "provCultures": [],
+            "terrain": 0
         },
         {
             "provinceID": 14,
@@ -314,17 +272,12 @@
             "provinceName": "Pangea",
             "provinceDescription": "Default",
             "isTransversable": true,
-            "cultureList": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "religions": {
-                "m_keys": [],
-                "m_values": []
-            },
-            "provinceRuralAtraction": 0.0,
-            "provinceUrbanAtraction": 0.0,
-            "naturalGrowth": 0.0
+            "ruralPopulation": 0,
+            "urbanPopulation": 0,
+            "aristocraticPopulation": 0,
+            "totalPopulation": 0,
+            "provCultures": [],
+            "terrain": 0
         }
     ]
 }
