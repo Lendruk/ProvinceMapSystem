@@ -10,11 +10,22 @@ public class ProvinceController : MonoBehaviour {
 
     public List<Country> countries = new List<Country>();
 
+    public List<ProvinceTerrain> terrains = new List<ProvinceTerrain>();
+
     private void Awake()
     {
         if (instance == null)
             instance = this;
     }
+    public ProvinceTerrain GetTerrainType(TerrainType type)
+    {
+        foreach(ProvinceTerrain terrain in terrains)
+        {
+            if (terrain.TerrainType == type) return terrain;
+        }
+        return null;
+    }
+
     public void AddProvince(Province provinceObject)
     {
         provinces.Add(provinceObject);

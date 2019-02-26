@@ -179,10 +179,7 @@ public class ProvinceInfo
     #endregion
 
     #region terrain
-    public enum TerrainType
-    {
-        Plains,Forest,Coast,Ocean,Lake,River,Desert,Grasslands
-    }
+
     public TerrainType terrain;
     #endregion
 

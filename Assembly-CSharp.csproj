@@ -81,9 +81,13 @@
     <Compile Include="Assets\ProvinceMap\Scripts\Province Information\Weather\Weather.cs" />
     <Compile Include="Assets\ProvinceMap\Scripts\Province\Province.cs" />
     <Compile Include="Assets\ProvinceMap\Scripts\Province\ProvinceController.cs" />
+    <Compile Include="Assets\ProvinceMap\Scripts\Province\ProvinceTerrain.cs" />
     <Compile Include="Assets\ProvinceMap\Scripts\Province\ProvinceUIController.cs" />
     <Compile Include="Assets\ProvinceMap\Scripts\Province\ProvinceUtility.cs" />
+    <Compile Include="Assets\ProvinceMap\Scripts\Province\TerrainType.cs" />
     <Compile Include="Assets\ProvinceMap\Scripts\ProvinceMaker.cs" />
+    <Compile Include="Assets\ProvinceMap\Scripts\Testing\PerlinNoise.cs" />
+    <Compile Include="Assets\ProvinceMap\Scripts\WorldTickManager.cs" />
     <Compile Include="Assets\Scripts\Biome.cs" />
     <Compile Include="Assets\Scripts\Biomes.cs" />
     <Compile Include="Assets\Scripts\MapCell.cs" />

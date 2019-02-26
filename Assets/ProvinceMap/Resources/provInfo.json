@@ -25,7 +25,7 @@
                     "religion": 1
                 }
             ],
-            "terrain": 0
+            "terrain": 1
         },
         {
             "provinceID": 2,
@@ -52,7 +52,7 @@
                     "religion": 1
                 }
             ],
-            "terrain": 0
+            "terrain": 1
         },
         {
             "provinceID": 3,
@@ -70,7 +70,7 @@
             "aristocraticPopulation": 0,
             "totalPopulation": 0,
             "provCultures": [],
-            "terrain": 0
+            "terrain": 8
         },
         {
             "provinceID": 4,
@@ -223,7 +223,7 @@
                     "religion": 2
                 }
             ],
-            "terrain": 2
+            "terrain": 0
         },
         {
             "provinceID": 12,
